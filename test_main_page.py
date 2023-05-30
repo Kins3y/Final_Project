@@ -1,8 +1,10 @@
 import selenium
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 def test_guest_can_go_to_login_page(browser):
     link = "http://selenium1py.pythonanywhere.com/"
     browser.get(link)
     login_link = browser.find_element(By.CSS_SELECTOR, "#login_link")
+    time.sleep(3)
     login_link.click()
