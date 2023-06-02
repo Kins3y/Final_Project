@@ -12,7 +12,7 @@ class LoginPage(BasePage):
         assert True
 
     def should_be_login_form(self):
-        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login dorm is not present"
+        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login form is not present"
         assert True
 
     def should_be_register_form(self):
