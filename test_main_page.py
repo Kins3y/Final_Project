@@ -4,7 +4,7 @@ import pytest
 
 link = "http://selenium1py.pythonanywhere.com"
 
-@pytest.mark.login_quest
+@pytest.mark.login_page
 class TestLoginFromMainPage():
     def test_guest_can_go_to_login_page(self, browser):
         page = MainPage(browser, link)
