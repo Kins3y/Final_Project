@@ -14,3 +14,7 @@ class ProductPageLocators():
     ITEM_NAME = (By.CSS_SELECTOR, 'div.col-sm-6.product_main > h1')
     ITEM_PRICE = (By.CSS_SELECTOR,'div.col-sm-6.product_main > p.price_color')
     BASKET_SUMMARY = (By.CSS_SELECTOR, '#messages > div:nth-child(3) > div > p > strong')
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
