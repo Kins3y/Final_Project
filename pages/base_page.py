@@ -42,14 +42,38 @@ class BasePage():
         try:
             alert = self.browser.switch_to.alert
             alert_text = alert.text
-            print(f"Your code: {alert_text}")
+            print(f'Your code: {alert_text}')
             alert.accept()
         except NoAlertPresentException:
-            print("No second alert presented")
+            print('No second alert presented')
 
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
     def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login link is not presented'
+
+    def go_to_basket_page(self):
+        link = self.browser.find_element(*BasePageLocators.SHOW_BASKET_BUTTON)
+        link.click()
+
+    def input_text(self, how, what, text):
+        try:
+            element = self.browser.find_element(how, what)
+            element.send_keys(text)
+        except NoSuchElementException:
+            return False
+        return True
+
+    def click_button(self, how, what):
+        try:
+            button = self.browser.find_element(how, what)
+            button.click()
+        except NoSuchElementException:
+            return False
+        return True
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), 'User icon is not presented,' \
+                                                                     'probably unauthorised user'
