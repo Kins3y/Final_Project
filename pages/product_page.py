@@ -7,8 +7,7 @@ class ProductPage(BasePage):
         self.should_be_add_to_basket_button()
         self.should_be_success_message()
         self.should_be_correct_item_added()
-        #self.should_be_correct_basket_summary()
-        #self.should_be_added_to_basket()
+        self.should_be_correct_basket_summary()
 
     def should_be_correct_url(self):
         newyear_promo = '?promo=offer'
@@ -30,3 +29,8 @@ class ProductPage(BasePage):
         basket_summary = self.browser.find_element(*ProductPageLocators.BASKET_SUMMARY).text
         assert item_price == basket_summary, 'item_price not equals basket_summary'
         assert True
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), 'Success message is presented, but should not be'
+
+    def should_not_be_success_form(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_FORM), 'Success form used to disappear'
