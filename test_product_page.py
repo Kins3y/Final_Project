@@ -5,10 +5,13 @@ import pytest
 import time
 
 link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209'
+
+
 @pytest.mark.guest_parametrized_tests
 class TestProductPage():
     @pytest.mark.need_review
-    @pytest.mark.parametrize('num_link',['0','1','2','3','4','5','6', pytest.param('7', marks=pytest.mark.xfail),'8','9'])
+    @pytest.mark.parametrize('num_link',
+                             ['0', '1', '2', '3', '4', '5', '6', pytest.param('7', marks=pytest.mark.xfail), '8', '9'])
     def test_guest_can_add_product_to_basket(self, browser, num_link):
         link_1 = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{num_link}"
         page = ProductPage(browser, link_1)
@@ -19,6 +22,8 @@ class TestProductPage():
         page.should_be_success_message()
         page.should_be_correct_item_added()
         page.should_be_correct_basket_summary()
+
+
 @pytest.mark.guest_xfail_tests
 class TestProductSecondHalf():
     @pytest.mark.xfail
@@ -32,6 +37,7 @@ class TestProductSecondHalf():
         page = ProductPage(browser, link)
         page.open()
         page.should_not_be_success_message()
+
     @pytest.mark.xfail
     def test_message_disappeared_after_adding_product_to_basket(self, browser):
         page = ProductPage(browser, link)
@@ -53,6 +59,7 @@ class TestProductSecondHalf():
         page.open()
         page.go_to_login_page()
 
+
 class TestBasketPageFromProductPage():
     @pytest.mark.need_review
     def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
@@ -62,6 +69,8 @@ class TestBasketPageFromProductPage():
         basket_page = BasketPage(browser, browser.current_url)
         basket_page.should_be_empty_basket()
         basket_page.should_be_text_about_empty_basket()
+
+
 @pytest.mark.user_basket_from_login
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(autouse=True)
@@ -76,6 +85,7 @@ class TestUserAddToBasketFromProductPage():
         page.open()
         page.register_new_user(email, password)
         page.should_be_authorized_user()
+
     def test_user_cant_see_success_message(self, browser):
         page = ProductPage(browser, link)
         page.open()

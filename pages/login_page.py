@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
 
+
 class LoginPage(BasePage):
     def should_be_login_page(self):
         self.should_be_login_url()
@@ -25,4 +26,3 @@ class LoginPage(BasePage):
         self.input_text(*LoginPageLocators.REGISTER_PASSWORD, password)
         self.input_text(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM, password)
         self.click_button(*LoginPageLocators.REGISTER_BUTTON)
-
