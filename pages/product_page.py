@@ -11,17 +11,22 @@ class ProductPage(BasePage):
         #self.should_be_added_to_basket()
 
     def should_be_correct_url(self):
-        newyear_promo = '?promo=newYear'
+        newyear_promo = '?promo=offer'
         assert newyear_promo in self.browser.current_url, "This is incorrect URL for NewYear promo"
         assert True
     def should_be_add_to_basket_button(self):
         link = self.browser.find_element(*ProductPageLocators.BASKET_BUTTON)
         link.click()
     def should_be_success_message(self):
-        sm = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE)
+        sm = self.browser.find_element(*ProductPageLocators.SUCCESS_FORM)
         assert sm.is_displayed, 'Success_message is not presented'
         assert True
     def should_be_correct_item_added(self):
         message_text = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
-        assert self.browser.find_element(*ProductPageLocators.ITEM_NAME).text in message_text, 'Wrong ITEM_NAME'
+        assert self.browser.find_element(*ProductPageLocators.ITEM_NAME).text == message_text, 'Wrong ITEM_NAME'
+        assert True
+    def should_be_correct_basket_summary(self):
+        item_price = self.browser.find_element(*ProductPageLocators.ITEM_PRICE).text
+        basket_summary = self.browser.find_element(*ProductPageLocators.BASKET_SUMMARY).text
+        assert item_price == basket_summary, 'item_price not equals basket_summary'
         assert True
