@@ -12,6 +12,8 @@ def browser(request):
     browser_language = request.config.getoption("language")
     if browser_language is not None:
         options = Options()
+        #options.add_argument("--headless")
+        #options.add_argument("--window-size=1920x1080")
         options.add_experimental_option('prefs', {'intl.accept_languages': browser_language})
         browser = webdriver.Chrome(options=options)
         print('\nstart Chrome browser for test..')
